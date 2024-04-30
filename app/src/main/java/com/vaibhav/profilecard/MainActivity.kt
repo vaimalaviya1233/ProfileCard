@@ -6,7 +6,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,7 +22,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -40,32 +38,24 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
-import coil.annotation.ExperimentalCoilApi
 import coil.compose.AsyncImage
-import coil.compose.rememberImagePainter
 import coil.request.ImageRequest
 import coil.transform.CircleCropTransformation
-//import com.google.accompanist.coil.rememberCoilPainter
-import com.vaibhav.profilecard.ui.theme.*
+import com.vaibhav.profilecard.ui.theme.Blake80
 import com.vaibhav.profilecard.ui.theme.MyTheme
+import com.vaibhav.profilecard.ui.theme.dark_lime
+import com.vaibhav.profilecard.ui.theme.dark_lime_green
+import com.vaibhav.profilecard.ui.theme.shapes
+import com.vaibhav.profilecard.ui.theme.smoothGreen
+import com.vaibhav.profilecard.ui.theme.smoothRed
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            /*ProfileCardTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }*/
             MyTheme {
                 MainScreen()
             }
@@ -121,13 +111,11 @@ fun AppBar(){
 fun ProfileCard(userProfile: UserProfile) {
     Card(
         modifier = Modifier
-//            .padding(vertical = 10.dp, horizontal = 16.dp)
             .padding(top = 8.dp, bottom = 4.dp, start = 16.dp, end = 16.dp)
             .fillMaxWidth()
             .wrapContentHeight(align = Alignment.Top),
         elevation = CardDefaults.elevatedCardElevation(defaultElevation = 18.dp),
         colors = CardDefaults.cardColors(
-//            containerColor = Color(255,255,255), // white background
             containerColor = dark_lime_green,
             contentColor = dark_lime
         ),
@@ -146,7 +134,6 @@ fun ProfileCard(userProfile: UserProfile) {
     }
 }
 
-@OptIn(ExperimentalCoilApi::class)
 @Composable
 fun ProfilePicture(pictureUrl: String, onlineStatus: Boolean) {
     Card(
@@ -168,28 +155,7 @@ fun ProfilePicture(pictureUrl: String, onlineStatus: Boolean) {
         elevation = CardDefaults.elevatedCardElevation(defaultElevation = 4.dp)
 
     ){
-        /*Image(
-
-            /*
-            painter = rememberCoilPainter(
-                request = pictureUrl,
-                requestBuilder = {
-                    transformations(CircleCropTransformation())
-                }
-            ),*/
-            painter = rememberImagePainter(
-                data = pictureUrl,
-                imageLoader = coil.ImageLoader(LocalContext.current),
-                builder = {
-                    this.crossfade(true)
-                    this.placeholder(R.drawable.profile_picture)
-                    transformations(CircleCropTransformation())
-                }
-            ),
-            contentDescription = "none",
-            modifier = Modifier.size((72.dp)),
-            contentScale = ContentScale.Crop
-        )*/
+        
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
                 .data(pictureUrl)
