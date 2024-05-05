@@ -68,5 +68,6 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(libs.coil.compose)
     implementation(libs.coil)
-//    implementation(libs.accompanist.coil)
+	implementation(libs.androidx.navigation.compose)
+    
 }
